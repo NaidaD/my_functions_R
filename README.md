@@ -1,4 +1,4 @@
-# my_functions_R
+```# my_functions_R
 ############################
 #удаляем выбросы
 outliers.rm <- function(x){
@@ -86,3 +86,4 @@ smart_cor <- function(df){
 
 ######################################
 
+```
