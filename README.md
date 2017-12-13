@@ -90,7 +90,18 @@ NA_position  <- function(x, y){
     all(is.na(x) == is.na(y))
 } 
 ####################################
-
+#Fisher or Chi - if observations n<5 or n>=5
+smart_test <- function(df){
+  test_df <- table(df)
+  min <- min(test_df)
+ if (min<5){
+ result <- fisher.test(test_df)$p.value  
+ } else {
+   result <- c(chisq.test(test_df)$statistic, chisq.test(test_df)$parameter, chisq.test(test_df)$p.value)
+}
+return(result)
+  }
+##############################################
 
 
 ```
