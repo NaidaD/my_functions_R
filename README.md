@@ -85,5 +85,12 @@ smart_cor <- function(df){
 }
 
 ######################################
+#NA positions in 2 vectors are on the same places?
+NA_position  <- function(x, y){
+    all(is.na(x) == is.na(y))
+} 
+####################################
+
+
 
 ```
