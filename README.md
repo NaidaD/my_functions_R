@@ -121,7 +121,14 @@ df[sort(vars)] <- NULL
 cbind(df, center)
 }
 ##################################################
+функция normality_test получает на вход dataframe с произвольным количеством переменных разных типов (количественные, строки, факторы) и проверяет нормальность распределения количественных переменных. Функция возвращает вектор значений p-уровней значимости теста shapiro.test для каждой количественной переменной.
 
+normality_test <- function(df){
+  nums <- df[sapply(df, is.numeric)]
+  sapply(nums, function(x) shapiro.test(x)$p.value)
+}
 
+##############################################
+is.numeric.data.frame <- function(x) sapply(x, is.numeric) - #show which vars are numeric in dataframe x
 
 ```
