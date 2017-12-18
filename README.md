@@ -154,7 +154,30 @@ smart_anova <- function(df){
     return(c)
   }
   ######################################################
+smart_hclust - функция, которая получает на вход dataframe  с произвольным числом количественных переменных и число кластеров, которое необходимо выделить при помощи иерархической кластеризации.
+Функция в исходный набор данных добавляет новую переменную фактор - cluster  - номер кластера, к которому отнесено каждое из наблюдений.
 
+smart_hclust <- function(df, n){
+  clusters <- hclust(dist(df))
+  df$cluster <- as.factor(cutree(clusters, n))
+  return(df)
+}
+
+#########################################################
+чтобы вытянуть p-value из результатов ANOVA
+fit <- aov(..., df)
+pvalue <- summary(fit)[[1]]$'Pr(>F)'[1]
+
+###########################################################
+Функция делит данные на n кластеров и выдает названия переменных, по которым значимо различаются выделенные кластеры.
+
+get_difference <- function(df, n){
+  clusters <- hclust(dist(df))
+  df$cluster <- as.factor(cutree(clusters, n))
+  pvalues<- sapply(df[, colnames(df)!="cluster"], function(x) summary(aov(x~cluster, df))[[1]]$'Pr(>F)'[1])
+ return(names(pvalues[pvalues<0.05]))
+}
+###############################################################
 
 
 
