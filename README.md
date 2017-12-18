@@ -178,7 +178,29 @@ get_difference <- function(df, n){
  return(names(pvalues[pvalues<0.05]))
 }
 ###############################################################
+ get_pc  получает на вход dataframe с произвольным числом количественных переменных. Функция выполняет анализ главных компонент и добавляет в исходные данные две новые колонки (PC1, PC2) со значениями первой и второй главной компоненты. 
+ 
+ get_pc <- function(df){
+   pc <- prcomp(df)$x
+   df$PC1 <- pc[,1]
+   df$PC2 <- pc[,2]
+   return(df)
+ }
+ 
+ OR
+ 
+ get_pc <- function(df){    
+	fit <- prcomp(df)    
+	df<- cbind(df, fit$x[,1:2])    
+	return(df)    
+}
 
+OR
+
+get_pc <- function(df) {
+  cbind(df, prcomp(df)$x[, 1:2]) 
+}
+####################################################################
 
 
 ```
