@@ -1,4 +1,9 @@
 ```# my_functions_R
+
+
+NA_position_in2Vectors  <- function(x, y){
+    all(is.na(x) == is.na(y))
+}
 ############################
 #удаляем выбросы
 outliers.rm <- function(x){
